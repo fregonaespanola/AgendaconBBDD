@@ -40,6 +40,7 @@ public class ContactListAdapter extends ListAdapter<Contact, ContactViewHolder> 
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return ContactViewHolder.create(parent);
+
     }
 
     public void setOnClickListener(View.OnClickListener listener){
