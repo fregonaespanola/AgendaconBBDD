@@ -59,6 +59,18 @@ class ContactRepository {
 //            ContactRoomDatabase.databaseWriteExecutor.execute(() -> {
 //                mContactDao.insert(contact);
 //            }
+
+
         );
     }
+
+    //DELETE
+        void delete(Contact contact) {
+            ContactRoomDatabase.databaseWriteExecutor.execute(() -> {
+               mContactDao.delete(contact.getmName().toString(), contact.getmPhone().toString());
+            }
+
+
+        );
+}
 }

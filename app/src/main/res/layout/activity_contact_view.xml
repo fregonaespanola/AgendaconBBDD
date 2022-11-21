@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ContactView">
+   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/contact"
+        android:id="@+id/contactImg"
+        tools:ignore="MissingConstraints"></ImageView>
+
+    <TextView
+        android:id="@+id/resultado"
+        android:layout_width="match_parent"
+        android:fontFamily="sans-serif-light"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_height="wrap_content"
+        android:hint="AQUI SE VERIAN LOS DATOS"
+        tools:ignore="MissingConstraints"></TextView>
+
+    <Button
+        android:id="@+id/button_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="EDIT"
+        android:layout_margin="@dimen/big_padding"
+        android:textColor="@color/buttonLabel" />
+
+       <Button
+           android:id="@+id/button_delete"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/colorPrimaryDark"
+           android:text="DELETE"
+           android:layout_margin="@dimen/big_padding"
+           android:textColor="@color/buttonLabel" />
+
+       <Button
+           android:id="@+id/button_back"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/colorPrimaryDark"
+           android:text="BACK"
+           android:layout_margin="@dimen/big_padding"
+           android:textColor="@color/buttonLabel" />
+
+   </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

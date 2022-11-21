@@ -28,7 +28,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class ContactListAdapter extends ListAdapter<Contact, ContactViewHolder> {
+public class ContactListAdapter extends ListAdapter<Contact, ContactViewHolder> implements  View.OnClickListener{
 
 
     private View.OnClickListener listener;
@@ -39,7 +39,10 @@ public class ContactListAdapter extends ListAdapter<Contact, ContactViewHolder> 
 
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return ContactViewHolder.create(parent);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.recyclerview_item,parent,false);
+        view.setOnClickListener(this);
+        return ContactViewHolder.create(view);
 
     }
 
@@ -47,11 +50,22 @@ public class ContactListAdapter extends ListAdapter<Contact, ContactViewHolder> 
         this.listener = listener;
     }
 
+
+    @Override
+    public void onClick(View view) {
+        if(listener != null)
+            listener.onClick(view);
+    }
+
+    public Contact getContacto(int pos) {return getItem(pos);}
+
     @Override
     public void onBindViewHolder(ContactViewHolder holder, int position) {
         Contact current = getItem(position);
         holder.bind(current.getmName(),current.getmPhone());
     }
+
+
 
 
     static class ContactDiff extends DiffUtil.ItemCallback<Contact> {
@@ -66,4 +80,5 @@ public class ContactListAdapter extends ListAdapter<Contact, ContactViewHolder> 
             return oldItem.getmName().equals(newItem.getmName());
         }
     }
+
 }

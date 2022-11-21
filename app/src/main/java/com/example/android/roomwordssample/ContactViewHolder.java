@@ -38,9 +38,10 @@ class ContactViewHolder extends RecyclerView.ViewHolder {
         phoneItemView.setText(phone);
     }
 
-    static ContactViewHolder create(ViewGroup parent) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recyclerview_item, parent, false);
+    static ContactViewHolder create(View view) {
+       // View view = LayoutInflater.from(parent.getContext())
+            //    .inflate(R.layout.recyclerview_item, parent, false);
         return new ContactViewHolder(view);
     }
+
 }

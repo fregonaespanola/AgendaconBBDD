@@ -48,4 +48,7 @@ public interface ContactDao {
 
     @Query("DELETE FROM contact_table")
     void deleteAll();
+
+    @Query("DELETE FROM contact_table WHERE name = :userId and phone = :userPhone")
+    void delete(String userId, String userPhone);
 }

@@ -49,4 +49,8 @@ public class ContactViewModel extends AndroidViewModel {
     void insert(Contact contact) {
         mRepository.insert(contact);
     }
+
+    void delete(Contact contact) {
+        mRepository.delete(contact);
+    }
 }

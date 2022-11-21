@@ -33,7 +33,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
 
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
-
+    public static String CONTACTO;
+    public Contact contacto;
+    public RecyclerView recyclerView;
     private ContactViewModel mContactViewModel;
 
     @Override
@@ -41,10 +43,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        recyclerView = findViewById(R.id.recyclerview);
         final ContactListAdapter adapter = new ContactListAdapter(new ContactListAdapter.ContactDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+
 
         // Get a new or existing ViewModel from the ViewModelProvider.
         mContactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
@@ -65,8 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.setOnClickListener(new android.view.View.OnClickListener(){
             public void onClick(View v){
-                Log.i("Mi App", "Pulsado el elemento " + recyclerView.getChildAdapterPosition(v));
-
+    contacto = adapter.getContacto(recyclerView.getChildAdapterPosition(v));
+                Log.i("Mi App", "Pulsado el elemento " + contacto.getmName());
+                paginaSiguiente(v);
             }});
 
     }
@@ -85,4 +92,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void paginaSiguiente(View v){
+        Intent intent= new Intent(this,ContactView.class);
+        Contact p = new Contact (contacto.getmName().toString(),contacto.getmPhone().toString());
+        Bundle b = new Bundle();
+        b.putSerializable(CONTACTO, p);
+        intent.putExtras(b);
+        startActivity(intent);
+    }
 }
