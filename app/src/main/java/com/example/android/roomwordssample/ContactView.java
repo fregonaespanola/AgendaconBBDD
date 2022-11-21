@@ -16,7 +16,6 @@ public class ContactView extends AppCompatActivity {
     Button back;
     Button edit;
     Button deletebutton;
-    private ContactViewModel mContactViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +25,9 @@ public class ContactView extends AppCompatActivity {
         resultado = findViewById(R.id.resultado);
         back = findViewById(R.id.button_back);
         deletebutton = findViewById(R.id.button_delete);
+        edit = findViewById(R.id.button_edit);
 
-        mContactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
+        MainActivity.mContactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
 
 
         Intent intent2 = getIntent();
@@ -45,7 +45,7 @@ public class ContactView extends AppCompatActivity {
         deletebutton.setOnClickListener(new android.view.View.OnClickListener(){
             public void onClick(View v){
 
-                mContactViewModel.delete(c);
+                MainActivity.mContactViewModel.delete(c);
                 volver(v);
             }});
     }

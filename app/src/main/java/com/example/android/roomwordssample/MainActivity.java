@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public static String CONTACTO;
     public Contact contacto;
     public RecyclerView recyclerView;
-    private ContactViewModel mContactViewModel;
+    public static ContactViewModel mContactViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
