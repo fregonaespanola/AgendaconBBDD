@@ -37,7 +37,7 @@ public class NewContactActivity extends AppCompatActivity {
 
     private EditText mEditNameView;
     private EditText mEditPhoneView;
-    Contact contacto;
+    private Contact contacto;
     public static String CONTACTO;
 
     @Override
