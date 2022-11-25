@@ -16,6 +16,9 @@ public class ContactView extends AppCompatActivity {
     Button back;
     Button edit;
     Button deletebutton;
+    public Contact contacto;
+    public static String CONTACTO;
+    public static boolean recibir=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class ContactView extends AppCompatActivity {
         resultado.setText("NOMBRE: " + c.getmName()+"\n");
         resultado.append("TELEFONO: " +c.getmPhone()+"\n");
 
+        contacto = new Contact(c.getmName(), c.getmPhone());
+
         back.setOnClickListener(new android.view.View.OnClickListener(){
             public void onClick(View v){
                 volver(v);
@@ -48,10 +53,28 @@ public class ContactView extends AppCompatActivity {
                 MainActivity.mContactViewModel.delete(c);
                 volver(v);
             }});
+
+
+        edit.setOnClickListener(new android.view.View.OnClickListener(){
+            public void onClick(View v){
+                paginaEditar(v);
+            }});
     }
+
+
 
     public void volver(View v){
         Intent intent= new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void paginaEditar(View v){
+        Intent intent= new Intent(this,NewContactActivity.class);
+        Contact p = new Contact (contacto.getmName().toString(),contacto.getmPhone().toString());
+        Bundle b = new Bundle();
+        b.putSerializable(CONTACTO, p);
+        intent.putExtras(b);
+        recibir=true;
         startActivity(intent);
     }
 }

@@ -16,12 +16,15 @@ package com.example.android.roomwordssample;
  * limitations under the License.
  */
 
+import static com.example.android.roomwordssample.ContactView.recibir;
+
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Parcelable;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -34,6 +37,9 @@ public class NewContactActivity extends AppCompatActivity {
 
     private EditText mEditNameView;
     private EditText mEditPhoneView;
+    Contact contacto;
+    public static String CONTACTO;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +47,30 @@ public class NewContactActivity extends AppCompatActivity {
         mEditNameView = findViewById(R.id.edit_name);
         mEditPhoneView = findViewById(R.id.edit_phone);
 
+        if(recibir==true) {
+            Intent intent2 = getIntent();
+            Bundle bun = intent2.getExtras();
+            contacto = (Contact) bun.getSerializable(MainActivity.CONTACTO);
+
+            mEditNameView.setText(contacto.getmName());
+            mEditPhoneView.append(contacto.getmPhone());
+
+        }
+
+
         final Button buttonsave = findViewById(R.id.button_save);
         buttonsave.setOnClickListener(view -> {
+                    if (recibir == true) {
+                        Intent replyIntent2 = new Intent();
+
+                            String name = mEditNameView.getText().toString();
+                            String phone = mEditPhoneView.getText().toString();
+                           MainActivity.mContactViewModel.delete(contacto);
+                            Contact con = new Contact(name, phone);
+                        MainActivity.mContactViewModel.insert(con);
+                        Intent volver= new Intent(this,MainActivity.class);
+                        startActivity(volver);
+                        }else{
             Intent replyIntent = new Intent();
             if (TextUtils.isEmpty(mEditNameView.getText()) && TextUtils.isEmpty(mEditPhoneView.getText())) {
                 setResult(RESULT_CANCELED, replyIntent);
@@ -54,8 +82,10 @@ public class NewContactActivity extends AppCompatActivity {
                 b.putSerializable(EXTRA_REPLY,c);
                 replyIntent.putExtras(b);
                 setResult(RESULT_OK, replyIntent);
-            }
+            }}
+            recibir=false;
             finish();
+
         });
     }
 }
